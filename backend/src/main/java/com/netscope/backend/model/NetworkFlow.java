@@ -41,7 +41,69 @@ public class NetworkFlow {
 
     protected NetworkFlow() {}
 
+    public NetworkFlow(
+            String sourceIp,
+            String destinationIp,
+            Integer sourcePort,
+            Integer destinationPort,
+            String protocol,
+            Long packetCount,
+            Long totalBytes,
+            Instant firstSeen,
+            Instant lastSeen
+    ) {
+        this.sourceIp = sourceIp;
+        this.destinationIp = destinationIp;
+        this.sourcePort = sourcePort;
+        this.destinationPort = destinationPort;
+        this.protocol = protocol;
+        this.packetCount = packetCount;
+        this.totalBytes = totalBytes;
+        this.firstSeen = firstSeen;
+        this.lastSeen = lastSeen;
+    }
+
+    public void setCapture(Capture capture) {
+        this.capture = capture;
+    }
+
     public Long getId() {
         return id;
+    }
+
+    public String getSourceIp() {
+        return sourceIp;
+    }
+
+    public String getDestinationIp() {
+        return destinationIp;
+    }
+
+    public Integer getSourcePort() {
+        return sourcePort;
+    }
+
+    public Integer getDestinationPort() {
+        return destinationPort;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public Long getPacketCount() {
+        return packetCount;
+    }
+
+    public Long getTotalBytes() {
+        return totalBytes;
+    }
+
+    public Instant getFirstSeen() {
+        return firstSeen;
+    }
+
+    public Instant getLastSeen() {
+        return lastSeen;
     }
 }

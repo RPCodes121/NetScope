@@ -8,6 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/captures")
@@ -28,4 +31,12 @@ public class CaptureController {
 
         return ResponseEntity.ok(response);
     }
+@GetMapping("/{id}")
+public ResponseEntity<CaptureResponse> getCaptureById(
+        @PathVariable Long id) {
+
+    return ResponseEntity.ok(
+            captureService.getCaptureById(id)
+    );
+}
 }
