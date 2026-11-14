@@ -40,14 +40,14 @@ public class CaptureService {
 
     public CaptureService(
             PcapReaderService pcapReaderService,
-            CaptureRepository captureRepository
+            CaptureRepository captureRepository,
             NetworkFlowRepository networkFlowRepository
     ) {
         this.pcapReaderService = pcapReaderService;
         this.captureRepository = captureRepository;
         this.networkFlowRepository=networkFlowRepository;
     }
-
+    @Transactional
     public CaptureResponse processCapture(MultipartFile file)
             throws IOException {
 
@@ -191,6 +191,34 @@ networkFlowRepository.saveAll(networkFlows);
     }
 
     // Retrieve all captures
+    @Transactional(readOnly = true)
+public List<CaptureResponse> getAllCaptures() {
+
+    return captureRepository.findAll()
+            .stream()
+            .map(capture -> {
+
+                Map<String, Long> protocols =
+                        capture.getProtocolStatistics()
+                                .stream()
+                                .collect(Collectors.toMap(
+                                        ProtocolStatistic::getProtocol,
+                                        ProtocolStatistic::getPacketCount
+                                ));
+
+                return new CaptureResponse(
+                        capture.getId(),
+                        capture.getFilename(),
+                        capture.getFileSize(),
+                        capture.getTotalPackets(),
+                        capture.getTotalBytes(),
+                        protocols,
+                        capture.getStatus(),
+                        capture.getUploadedAt()
+                );
+            })
+            .toList();
+}
    @Transactional(readOnly = true)
         public CaptureResponse getCaptureById(Long id) {
 

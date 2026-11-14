@@ -67,6 +67,10 @@ public class NetworkFlow {
         this.capture = capture;
     }
 
+    public Capture getCapture(){
+        return capture;
+    }
+
     public Long getId() {
         return id;
     }

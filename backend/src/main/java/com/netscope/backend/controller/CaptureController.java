@@ -31,6 +31,12 @@ public class CaptureController {
 
         return ResponseEntity.ok(response);
     }
+    @GetMapping
+    public ResponseEntity<List<CaptureResponse>> getAllCaptures() {
+    return ResponseEntity.ok(
+            captureService.getAllCaptures()
+    );
+}
 @GetMapping("/{id}")
 public ResponseEntity<CaptureResponse> getCaptureById(
         @PathVariable Long id) {

@@ -1,3 +1,5 @@
 backend/.env
 **/.env
 backend/src/main/java/com/netscope/backend/controller/DatabaseTestController.java
+postman
+.postman
